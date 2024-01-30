@@ -144,10 +144,6 @@ def main():
                 if event.key == pg.K_SPACE:
                     bird.jump()
                 global SPEED  # Домашнее задание 3
-                # if event.key == pg.K_RIGHT:
-                #     SPEED +=10
-                # if event.key == pg.K_LEFT:
-                #     SPEED -=10
 
         pipes.update()
         if pipes.sprites()[-1].rect.x <= SCREEN_WIDTH / 3:
