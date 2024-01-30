@@ -68,7 +68,7 @@ class Bird(pg.sprite.Sprite):
             self.velocity = self.lift
 
 
-class Pipe(pg.sprite.Sprite):
+class Spike(pg.sprite.Sprite):
     TOP = 1
     BOTTOM = 2
 
@@ -87,15 +87,15 @@ class Pipe(pg.sprite.Sprite):
 
 
 bird = Bird()
-pipes = pg.sprite.Group()
+spikes = pg.sprite.Group()
 
 
-def make_pipes():
+def make_spikes():
     gap_start = SCREEN_HEIGHT - PIPE_GAP - random.choice((25, 50))
 
-    bottom_pipe = Pipe(Pipe.BOTTOM, gap_start)
-    pipes.add(
-        bottom_pipe
+    bottom_spike = Spike(Spike.BOTTOM, gap_start)
+    spikes.add(
+        bottom_spike
     )
 
 
@@ -107,8 +107,8 @@ def animate_gameover():  # ДЗ 3
     for i in range(20):  # Количество кадров анимации подпрыгивания
         bird.update()
         screen.fill(WHITE)
-        pipes.update()
-        pipes.draw(screen)
+        spikes.update()
+        spikes.draw(screen)
         draw_score()
         screen.blit(bird.image, bird.rect)
         pg.display.update()
@@ -118,8 +118,8 @@ def animate_gameover():  # ДЗ 3
     while bird.rect.y < SCREEN_HEIGHT - BIRD_HEIGHT:
         bird.update()  # Обновляем положение птицы с учетом гравитации
         screen.fill(WHITE)
-        pipes.update()
-        pipes.draw(screen)
+        spikes.update()
+        spikes.draw(screen)
         screen.blit(bird.image, bird.rect)
         draw_score()
 
@@ -134,8 +134,8 @@ def main():
     global SPEED  # ДЗ  4 и 5
     bird.rect.center = (SCREEN_WIDTH // 4, SCREEN_HEIGHT // 2)
     bird.velocity = 0
-    pipes.empty()
-    make_pipes()
+    spikes.empty()
+    make_spikes()
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT:
@@ -145,18 +145,18 @@ def main():
                     bird.jump()
                 global SPEED  # Домашнее задание 3
 
-        pipes.update()
-        if pipes.sprites()[-1].rect.x <= SCREEN_WIDTH / 3:
-            make_pipes()
+        spikes.update()
+        if spikes.sprites()[-1].rect.x <= SCREEN_WIDTH / 3:
+            make_spikes()
 
-        for p in pipes:
+        for p in spikes:
             if p.rect.right < bird.rect.left and not p.passed:
                 p.passed = True
                 score += 0.5
 
         bird.update()
 
-        collisions = pg.sprite.spritecollide(bird, pipes, False)
+        collisions = pg.sprite.spritecollide(bird, spikes, False)
         if collisions:
             # lives -= 1# ДЗ 3. Необходимо добавить атрибут птице, по аналогии с is_passed для труб.
             # if lives <= 0:# ДЗ 3
@@ -166,7 +166,7 @@ def main():
 
         screen.fill(WHITE)
         screen.blit(bird.image, bird.rect)
-        pipes.draw(screen)
+        spikes.draw(screen)
         draw_score()
         # draw_text(f'Lives: {lives}', [10, 30]) # ДЗ 3
         pg.display.update()
