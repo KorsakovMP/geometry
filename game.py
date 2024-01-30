@@ -3,7 +3,7 @@ import pygame_menu
 import random
 
 pg.init()
-pg.display.set_caption('Flappy Bird')
+pg.display.set_caption('super geometry dash')
 # Определение констант
 FPS = 1000 // 60
 SCREEN_WIDTH = 480
@@ -17,7 +17,7 @@ WHITE = (255, 255, 255)
 GREEN = (0, 128, 0)
 YELLOW = (255, 255, 0)
 screen = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pg.display.set_caption('Flappy Bird')
+pg.display.set_caption('geometry dash')
 score = 0
 font = pg.font.Font(None, 36)  # Шрифт для отображения очков
 
@@ -184,7 +184,7 @@ def show_end_screen():
 
 
 def show_start_screen():
-    menu = pygame_menu.Menu('Flappy Bird', 300, 400, theme=pygame_menu.themes.THEME_BLUE)
+    menu = pygame_menu.Menu('geometry dash', 400, 400, theme=pygame_menu.themes.THEME_BLUE)
     menu.add.button('Начать', main)
     menu.add.button('Выйти', pygame_menu.events.EXIT)
     menu.mainloop(screen)
