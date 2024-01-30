@@ -76,9 +76,6 @@ class Pipe(pg.sprite.Sprite):
         super().__init__()
         self.image = pg.image.load('spike_black.jpg')
         self.image = pg.transform.scale(self.image, [PIPE_WIDTH, self.image.get_height() / 2])
-        # if type == self.TOP:
-        #     self.image = pg.transform.flip(self.image, False, True)
-        #     self.rect = self.image.get_rect(bottomleft=(SCREEN_WIDTH, gap_start))
         if type == self.BOTTOM:
             self.rect = self.image.get_rect(topleft=(SCREEN_WIDTH, gap_start + PIPE_GAP))
         self.passed = False
@@ -94,11 +91,10 @@ pipes = pg.sprite.Group()
 
 
 def make_pipes():
-    gap_start = SCREEN_HEIGHT - PIPE_GAP - random.choice((25, 50))  # random.randint(50, SCREEN_HEIGHT - PIPE_GAP - 50)
-    # top_pipe = Pipe(Pipe.TOP, gap_start)
+    gap_start = SCREEN_HEIGHT - PIPE_GAP - random.choice((25, 50))
+
     bottom_pipe = Pipe(Pipe.BOTTOM, gap_start)
     pipes.add(
-        # top_pipe,
         bottom_pipe
     )
 
